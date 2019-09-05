@@ -4,8 +4,8 @@
 	<form action="options.php" method="post">
 
 		<?php
-		// settings_fields( P4_GPCH_RNLW_PREFIX . '_donation_settings' );
-		// do_settings_sections( P4_GPCH_RNLW_PREFIX . '_donation_settings' );
+		settings_fields( P4_GPCH_RNLW_PREFIX . '_setup' );
+		do_settings_sections( P4_GPCH_RNLW_PREFIX . '_setup' );
 		submit_button();
 		?>
 
