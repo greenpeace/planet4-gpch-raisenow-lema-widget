@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 
 // constants
 define( 'P4_GPCH_RNLW_BASE_PATH', plugin_dir_path( __FILE__ ) );
-define( 'P4_GPCH_RNLW_PREFIX', 'planet4-gpch-raisenow-lema-widget' );
+define( 'P4_GPCH_RNLW_PREFIX', 'planet4_gpch_raisenow_lema_widget' );
 
 // include the composer autoload file
 require_once P4_GPCH_RNLW_BASE_PATH . 'vendor/autoload.php';
