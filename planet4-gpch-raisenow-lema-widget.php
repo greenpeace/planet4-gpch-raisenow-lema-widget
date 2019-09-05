@@ -29,3 +29,6 @@ require_once P4_GPCH_RNLW_BASE_PATH . 'vendor/autoload.php';
 
 // initialize the plugin
 $planet4_gpch_raisenow_lema_widget = Greenpeace\Planet4GPCHRaiseNowLemaWidget\Planet4_GPCH_RaiseNow_Lema_Widget::get_instance();
+
+// @todo implement hooks here (if possible)
+// $planet4_gpch_raisenow_lema_widget->hook_into_wordpress();
