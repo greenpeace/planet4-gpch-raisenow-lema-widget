@@ -44,10 +44,10 @@ if ( ! class_exists( 'Planet4_GPCH_RaiseNow_Lema_Widget' ) ) {
 
 		public function add_menu() {
 			add_options_page(
-				__( 'RaiseNow Lema Widget', P4_GPCH_RNLW_PREFIX ),
-				__( 'RaiseNow Lema Widget', P4_GPCH_RNLW_PREFIX ),
+				__( 'RaiseNow Lema Widget Setup', P4_GPCH_RNLW_PREFIX ),
+				__( 'RaiseNow Lema Widget Setup', P4_GPCH_RNLW_PREFIX ),
 				'manage_options',
-				'raisenow_lema_widget_setup',
+				P4_GPCH_RNLW_PREFIX . '_setup',
 				[ $this, 'render_options_page' ]
 			);
 		}
@@ -59,12 +59,34 @@ if ( ! class_exists( 'Planet4_GPCH_RaiseNow_Lema_Widget' ) ) {
 		public function add_options() {
 			$context = get_current_screen();
 
-			if ( $context->base && $context->base == 'settings_page_raisenow_lema_widget_setup' ) {
-				print_r( '[$context->base]' );
-				print_r( $context->base );
+			// print_r( '[$context->base]' );
+			// print_r( $context->base );
 
-				// require_once
-				// $options =
+			if ( $context->base && $context->base == 'settings_page_' . P4_GPCH_RNLW_PREFIX . '_setup' ) {
+
+				// print_r( '[$context->base]' );
+				// print_r( $context->base );
+
+				register_setting( P4_GPCH_RNLW_PREFIX . '_setup', P4_GPCH_RNLW_PREFIX . '_general_options' );
+
+				add_settings_section(
+					P4_GPCH_RNLW_PREFIX . '_general_section',
+					__( 'General Options', P4_GPCH_RNLW_PREFIX ),
+					[ $this, 'general_options_section_header' ],
+					P4_GPCH_RNLW_PREFIX . '_setup'
+				);
+
+				add_settings_field(
+					P4_GPCH_RNLW_PREFIX . '_test_mode',
+					__( 'Turn test mode on', P4_GPCH_RNLW_PREFIX ),
+					[ $this, 'render_general_options_checkbox' ],
+					P4_GPCH_RNLW_PREFIX . '_setup',
+					P4_GPCH_RNLW_PREFIX . '_general_section',
+					[
+						'option_id' => 'test_mode',
+						'helptext'  => "<p>" . __( 'Turn on test mode for the forms. No real transactions possible and debug information is printed to the page. Only use this setting if RaiseNow is also in test mode.', P4_GPCH_RNLW_PREFIX ) . "</p>",
+					]
+				);
 			}
 
 			// register the options if we're on the corresponding option page
@@ -79,6 +101,25 @@ if ( ! class_exists( 'Planet4_GPCH_RaiseNow_Lema_Widget' ) ) {
 				}
 			}
 			*/
+		}
+
+		public function general_options_section_header() {
+		}
+
+		public function render_general_options_checkbox( $args ) {
+			$options_id = P4_GPCH_RNLW_PREFIX . '_general_options';
+			$options    = get_option( $options_id );
+
+			if ( isset( $options[ $args['option_id'] ] ) ) {
+				$input = $options[ $args['option_id'] ];
+			} else {
+				$input = 0;
+			}
+
+			echo $args['helptext'];
+
+			echo "<input type='checkbox' name='{$options_id}[{$args['option_id']}]' id='$options_id-{$args['option_id']}' value='1'" . checked( $input, 1, false ) . ">";
+
 		}
 	}
 }
