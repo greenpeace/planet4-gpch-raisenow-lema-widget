@@ -12,3 +12,20 @@
  * License URI: https://opensource.org/licenses/MIT
  * Text Domain: planet4-gpch-raisenow-lema-widget
  */
+
+// exit if accessed directly
+defined( 'ABSPATH' ) || exit;
+
+// Planet4 = P4
+// Greenpeace Switzerland = GPCH
+// RaiseNow Lema Widget = RNLW
+
+// constants
+define( 'P4_GPCH_RNLW_BASE_PATH', plugin_dir_path( __FILE__ ) );
+define( 'P4_GPCH_RNLW_PREFIX', 'planet4-gpch-raisenow-lema-widget' );
+
+// include the composer autoload file
+require_once P4_GPCH_RNLW_BASE_PATH . 'vendor/autoload.php';
+
+// initialize the plugin
+$planet4_gpch_raisenow_lema_widget = Greenpeace\Planet4GPCHRaiseNowLemaWidget\Planet4_GPCH_RaiseNow_Lema_Widget::get_instance();
